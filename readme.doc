@@ -1,0 +1,44 @@
+﻿
+
+
+
+Spring Batch
+
+
+
+
+
+
+The preceding diagram highlights the key concepts that make up the domain language of Spring Batch. A Job has one to many steps, each of which has exactly one ItemReader, one ItemProcessor, and one ItemWriter. A job needs to be launched (with JobLauncher), and metadata about the currently running process needs to be stored (in JobRepository).
+
+1. Job
+
+1.1. Jobs: A Job is an entity that encapsulates an entire batch process. As is common with other Spring projects, a Job is wired together with either an XML configuration file or Java-based configuration.
+
+Job --> JobInstance --> JobExecution
+
+Job is simply container of step instance.
+It combines multiples steps that belong logically together.
+
+Job Configurations :
+1. Simple name of job
+2. Definition and ordering of step instance
+3. wheter or not the job is restartable.
+
+i.e @Bean public Job footballJob() { return this.jobBuilderFactory.get("footballJob") .start(playerLoad()) .next(gameLoad()) .next(playerSummarization()) .end() .build(); }
+
+1.2. JobsInstance :Jobinstance can have multiple JobExecution  
+JobInstnace corresponding to particular Job and identifying JobParameters can run at given time.
+
+JobInstance = job + jobparameter
+
+1.3. jobParameter: objects that holds a set of parameter used to start a job.
+
+1.4. JobExecution: is primary storage mechanism for what actually happened during a run and it contains many properties that must have controlled and persisted
+
+status , startTime, endTime, exitStatus, createTime, lastUpdated, executionContext, failureExceptions.
+
+ 
+2. Step : step contains all the information necessary to define and control the actual batch processing.
+
+
