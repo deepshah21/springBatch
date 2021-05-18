@@ -41,4 +41,12 @@ status , startTime, endTime, exitStatus, createTime, lastUpdated, executionConte
  
 2. Step : step contains all the information necessary to define and control the actual batch processing.
 
+2.1. StepExecutions: single attempt to execute step.stepExecution created only when step is started.
+It contains more properties than jobExecutions.
+
+Status, startTime, endTime, exitStatus, executionContext, readCount, writeCount, commitCount, rollBackCount, processSkipCount, filterCount, writeSkipCount.
+
+3. ExecutionContext: An ExecutionContext represents a collection of key/value pairs that are persisted and controlled by the framework in order to allow developers a place to store persistent state that is scoped to a StepExecution object or a JobExecution object.
+
+executionContext.putLong(getKey(LINES_READ_COUNT), reader.getPosition());
 
